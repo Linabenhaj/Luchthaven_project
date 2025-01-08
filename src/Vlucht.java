@@ -20,4 +20,11 @@ public class Vlucht {
     public String getVluchtCode(){
         return vluchtcode;
     }
+    public void voegPassagierToe(Passagier passagier) {
+        Passagier.add(passagier);
+    }
+    public void voegPersoneelslidToe(Personeelslid personeelslid) {
+        Personeelslid.add(personeelslid);
+    }
+
 
