@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.List;
+
 public class Vlucht {
     String vluchtcode;
     String bestemming;
@@ -21,10 +23,19 @@ public class Vlucht {
         return vluchtcode;
     }
     public void voegPassagierToe(Passagier passagier) {
-        Passagier.add(passagier);
+        passagiers.add(passagier);
     }
     public void voegPersoneelslidToe(Personeelslid personeelslid) {
-        Personeelslid.add(personeelslid);
+        personeel.add(personeelslid);
     }
 
 
+//print vluchtinfo?
+    public void printVluchtInfo(){
+        System.out.println("Vluchtcode: " + vluchtcode);
+        System.out.println("Bestemming: " + bestemming);
+        System.out.println("Aantal Economy plaatsen: " + aantalEconomyPlaatsen);
+        System.out.println("Aantal Business plaatsen: " + aantalBusinessPlaatsen);
+        System.out.println("Aantal passagiers: " + passagiers());
+        System.out.println("Aantal personeelsleden: " + personeel());
+    }
