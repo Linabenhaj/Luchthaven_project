@@ -29,13 +29,19 @@ public class Vlucht {
         personeel.add(personeelslid);
     }
 
+//aangeven dat de vlucht vol is
 
-//print vluchtinfo?
-    public void printVluchtInfo(){
-        System.out.println("Vluchtcode: " + vluchtcode);
-        System.out.println("Bestemming: " + bestemming);
-        System.out.println("Aantal Economy plaatsen: " + aantalEconomyPlaatsen);
-        System.out.println("Aantal Business plaatsen: " + aantalBusinessPlaatsen);
-        System.out.println("Aantal passagiers: " + passagiers());
-        System.out.println("Aantal personeelsleden: " + personeel());
+    public boolean isVol(){
+    return passagiers.size() >= (aantalEconomyPlaatsen + aantalBusinessPlaatsen);
     }
+}
+//print vluchtinfo?
+public void printVluchtInfo(){
+    System.out.println("Vluchtcode:" + vluchtcode);
+    System.out.println("Bestemming: " + bestemming);
+    System.out.println("Aantal Economy plaatsen:" + aantalEconomyPlaatsen);
+    System.out.println("Aantal Business plaatsen: " + aantalBusinessPlaatsen);
+    System.out.println("Aantal passagiers: " + passagiers.size());
+    System.out.println("Aantal personeelsleden: " + personeel.size());
+}
+
