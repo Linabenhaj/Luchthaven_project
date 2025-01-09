@@ -52,14 +52,13 @@ public class Luchthaven {
         if (passagier.ticket == null || !passagier.ticket.vlucht.equals(vlucht)) {
             System.out.println("Passagier " + passagier.naam + " heeft geen geldig ticket voor deze vlucht.");
 
-        } else if (vlucht.isVol()) {
-            System.out.println("De vlucht is vol, passagier " + passagier.naam + " kan niet boarden.");
         } else {
             vlucht.voegPassagierToe(passagier);
-            System.out.println("passagier " + passagier.naam + " is succesvol aan boord gegaan.");
+            System.out.println("Passagier " + passagier.naam + " is succesvol aan boord gegaan.");
         }
     }
-//personeel toevoegen aan een vlucht
+
+    //personeel toevoegen aan een vlucht
         public void voegPersoneelToeAanVlucht(Personeelslid personeelslid, Vlucht vlucht) {
             vlucht.voegPersoneelslidToe(personeelslid);
         }
