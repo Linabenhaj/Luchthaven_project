@@ -74,11 +74,19 @@ public class Main {
                         if (vlucht != null){
                             vlucht.voegPassagierToe(passagier);
                             System.out.println("Passagier toegevoegd aan de vlucht.");
-                        }else {
+                            Piloot piloot = new Piloot("Jan de Piloot", 45, "Straat 123");
+                            vlucht.voegPersoneelslidToe(piloot);
+
+                            if (piloot.flightCheck(vlucht)) {
+                                System.out.println("Flightcheck oke! Alles is in orde, de vlucht kan opstijgen.");
+                            } else {
+                                System.out.println("Flightcheck niet oke. De vlucht kan niet opstijgen.");
+                            }
+
+                        } else {
                             System.out.println("Vlucht niet gevonden.");
                         }
-                    } else{
-
+                    } else {
                         System.out.println("Passagier kan niet worden toegevoegd vanwege te zwaar bagage.");
                     }
                     break;
@@ -102,6 +110,16 @@ public class Main {
                 }
                 case 6: {
                     System.out.println("Programma is gestopt.");
+                    for (Vlucht vlucht : luchthaven.vluchten) {
+                        if (!vlucht.personeel.isEmpty()) {
+                            Personeelslid piloot = vlucht.personeel.get(0);
+                            if (piloot instanceof Piloot) {
+                                ((Piloot) piloot).flightCheck(vlucht);
+                            }
+                        } else {
+                            System.out.println("Flightcheck niet oke. Geen personeel aan boord.");
+                        }
+                    }
                     scanner.close();
                     return;
                 }
