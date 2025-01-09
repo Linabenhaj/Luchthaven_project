@@ -31,7 +31,7 @@ public class Luchthaven {
 //opzoeken van bestaande vlucht en zijn informatie
     public Vlucht zoekVluchtOpCode(String code) {
         for (Vlucht vlucht : vluchten) {
-            if (vlucht.getVluchtCode().equals(code)) {
+            if (vlucht.getVluchtCode().equals(code)){
                 return vlucht;
             }
         }
@@ -47,6 +47,7 @@ public class Luchthaven {
             System.out.println("Bagage van " + passagier.naam + " is te zwaar, u krijgt geen ticket.");
         }
     }
+
     // als bagage ok dan mag die boarden
     public void laatPassagierBoarden(Passagier passagier, Vlucht vlucht) {
         if (passagier.ticket == null || !passagier.ticket.vlucht.equals(vlucht)) {
@@ -55,13 +56,26 @@ public class Luchthaven {
         } else {
             vlucht.voegPassagierToe(passagier);
             System.out.println("Passagier " + passagier.naam + " is succesvol aan boord gegaan.");
+            Piloot piloot = zoekPiloot(vlucht);
+            if (piloot != null && piloot.flightCheck(vlucht)){
+                System.out.println("Flightcheck oke! Alles is in orde, de vlucht kan opstijgen.");
+            }
         }
     }
-
     //personeel toevoegen aan een vlucht
         public void voegPersoneelToeAanVlucht(Personeelslid personeelslid, Vlucht vlucht) {
             vlucht.voegPersoneelslidToe(personeelslid);
         }
+
+    public Piloot zoekPiloot(Vlucht vlucht){
+        for (Personeelslid personeelslid : vlucht.personeel) {
+            if (personeelslid instanceof Piloot) {
+                return (Piloot) personeelslid;
+            }
+        }
+
+        return null;
+    }
 
     //vluctinfo structuur voor exporteren
     public void exporteerAlleVluchtInfo() {
