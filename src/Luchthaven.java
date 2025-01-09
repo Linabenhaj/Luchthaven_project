@@ -69,6 +69,10 @@ public class Luchthaven {
                 for (Vlucht vlucht : vluchten) {
                     writer.write("Vluchtcode: " +vlucht.vluchtcode + System.lineSeparator());
                     writer.write("Bestemming: " +vlucht.bestemming + System.lineSeparator());
+                    writer.write("Aantal Economy plaatsen: " + vlucht.aantalEconomyPlaatsen + System.lineSeparator());
+                    writer.write("Aantal Business plaatsen: " + vlucht.aantalBusinessPlaatsen + System.lineSeparator());
+                    writer.write("Aantal passagiers: " + vlucht.passagiers.size() + System.lineSeparator());
+                    writer.write("Aantal personeelsleden: " + vlucht.personeel.size() + System.lineSeparator());
                     writer.write(System.lineSeparator());
                 }
                 System.out.println("Vluchtinformatie succesvol geëxporteerd.");
