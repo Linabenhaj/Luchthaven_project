@@ -1,9 +1,12 @@
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Luchthaven luchthaven = new Luchthaven();
 
         while(true){
@@ -17,7 +20,7 @@ public class Main {
 
             int keuze = Integer.parseInt(scanner.nextLine());
             switch (keuze) {
-                case 1:
+                case 1: {
                     System.out.print("Vluchtcode: ");
                     String vluchtcode = scanner.nextLine();
                     System.out.print("Bestemming:");
@@ -28,43 +31,85 @@ public class Main {
                     int business = Integer.parseInt(scanner.nextLine());
 
                     Vlucht vlucht = new Vlucht(vluchtcode, bestemming, economy, business);
-                    vlucht = scanner.nextLina();
-
+                    luchthaven.voegVluchtToe(vlucht);
                     break;
-                    case 2:
-                        System.out.print("Naam personeelslid: ");
-                        String naam = scanner.nextLine();
-                        System.out.print("Leeftijd: ");
-                        int leeftijd = Integer.parseInt(scanner.nextLine());
-                        System.out.print("Adres: ");
-                        String adres = scanner.nextLine();
+                }
 
-                        Personeelslid personeelslid = new Personeelslid(naam, leeftijd, adres);
-                        vluchtcode = scanner.nextLine();
+                case 2: {
+                    System.out.print("Naam personeelslid: ");
+                    String naam = scanner.nextLine();
+                    System.out.print("Leeftijd: ");
+                    int leeftijd = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Adres: ");
+                    String adres = scanner.nextLine();
 
-                        break;
+                    Personeelslid personeelslid = new Personeelslid(naam, leeftijd, adres);
+                    System.out.print("Kies een vluchtcode om het personeelslid toe te voegen: ");
+                    String vluchtcode = scanner.nextLine();
+                    Vlucht vlucht = luchthaven.zoekVluchtOpCode(vluchtcode);
+                    if (vlucht != null) {
+                        vlucht.voegPersoneelslidToe(personeelslid);
+                    } else{
+                        System.out.println("Vlucht niet gevonden!");
+                    }
+                    break;
+                }
+                case 3: {
+                    System.out.print("Naam passagier: ");
+                    String naam = scanner.nextLine();
+                    System.out.print("Leeftijd: ");
+                    int leeftijd = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Adres: ");
+                    String adres = scanner.nextLine();
+                    System.out.println("Bagagegewicht:");
+                    double bagageGewicht = Double.parseDouble(scanner.nextLine());
 
-                        case 3:
-                            System.out.print("Naam passagier: ");
-                            String naam = scanner.nextLine();
-                            System.out.print("Leeftijd: ");
-                            int leeftijd = Integer.parseInt(scanner.nextLine());
-                            System.out.print("Adres: ");
-                            String adres = scanner.nextLine();
-// bagage toevoegen
-                            break;
-                            case 4:
-                                System.out.print("Kies een vluchtcode om informatie te printen:");
-   // hoe linken van de vluchtcode?
+                    Passagier passagier = new Passagier(naam, leeftijd, adres, bagageGewicht);
 
-                                break;
-                                case 5: luchthaven.exporteerAlleVluchtInfo();
-                                break;
-                                case 6:
-                                    System.out.println("Programma stoppen");
+                    if (passagier.isBagageInOrde()){
+                        System.out.print("Vluchtcode om de passagier toe te voegen: ");
+                        String vluchtcode =scanner.nextLine();
+                        Vlucht vlucht = luchthaven.zoekVluchtOpCode(vluchtcode);
+
+                        if (vlucht != null){
+                            vlucht.voegPassagierToe(passagier);
+                            System.out.println("Passagier toegevoegd aan de vlucht.");
+                        }else {
+                            System.out.println("Vlucht niet gevonden.");
+                        }
+                    } else{
+
+                        System.out.println("Passagier kan niet worden toegevoegd vanwege te zwaar bagage.");
+                    }
+                    break;
+                }
+                case 4: {
+                    System.out.print("Vluchtcode om informatie te printen: ");
+                    String vluchtcode = scanner.nextLine();
+                    Vlucht vlucht = luchthaven.zoekVluchtOpCode(vluchtcode);
+
+                    if (vlucht != null) {
+                        vlucht.printVluchtInfo();
+                    } else {
+                        System.out.println("Vlucht niet gevonden.");
+                    }
+                    break;
+                }
+
+                case 5: {
+                    luchthaven.exporteerAlleVluchtInfo();
+                    break;
+                }
+                case 6: {
+                    System.out.println("Programma is gestopt.");
+                    scanner.close();
+                    return;
+                }
+                default: {
+                    System.out.println("Ongeldige keuze, probeer opnieuw");
+                }
 
             }
         }
-        scanner.close();
-        }
     }
+}
