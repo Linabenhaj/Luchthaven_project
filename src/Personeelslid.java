@@ -1,12 +1,6 @@
-public class Personeelslid {
-    String naam;
-    int leeftijd;
-    String adres;
-
-
-    public Personeelslid(String naam, int leeftijd, String adres) {
-        this.naam = naam;
-        this.leeftijd = leeftijd;
-        this.adres = adres;
+public class Personeelslid extends Persoon{
+        public Personeelslid(String naam, int leeftijd, String adres) {
+            super(naam, leeftijd, adres);
+        }
     }
-}
+
