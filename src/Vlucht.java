@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+//bepalen van de objecten
 public class Vlucht {
     String vluchtcode;
     String bestemming;
@@ -9,7 +10,7 @@ public class Vlucht {
     List<Passagier> passagiers;
     List<Personeelslid> personeel;
 
-
+//constructor plaatsen
     public Vlucht(String vluchtcode, String bestemming, int aantalEconomyPlaatsen, int aantalBusinessPlaatsen){
         this.vluchtcode = vluchtcode;
         this.bestemming = bestemming;
@@ -19,6 +20,7 @@ public class Vlucht {
         this.personeel = new ArrayList<>();
     }
 
+//getter
     public String getVluchtCode(){
         return vluchtcode;
     }
@@ -29,12 +31,15 @@ public class Vlucht {
         personeel.add(personeelslid);
     }
 
-//aangeven dat de vlucht vol is
-
-    public boolean isVol(){
-    return passagiers.size() >= (aantalEconomyPlaatsen + aantalBusinessPlaatsen);
+    public boolean isErEenPiloot() {
+        for (Personeelslid personeelslid : personeel) {
+            if (personeelslid instanceof Piloot) {
+                return true;
+            }
+        }
+        return false;
     }
-}
+
 //print vluchtinfo?
 public void printVluchtInfo(){
     System.out.println("Vluchtcode:" + vluchtcode);
@@ -43,5 +48,6 @@ public void printVluchtInfo(){
     System.out.println("Aantal Business plaatsen: " + aantalBusinessPlaatsen);
     System.out.println("Aantal passagiers: " + passagiers.size());
     System.out.println("Aantal personeelsleden: " + personeel.size());
+    }
 }
 
