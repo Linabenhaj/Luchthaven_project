@@ -21,7 +21,7 @@ public class Main {
             int keuze = Integer.parseInt(scanner.nextLine());
             switch (keuze) {
                 case 1: {
-                    System.out.print("Vluchtcode: ");
+                    System.out.print("Vluchtcode:");
                     String vluchtcode = scanner.nextLine();
                     System.out.print("Bestemming:");
                     String bestemming = scanner.nextLine();
@@ -49,7 +49,7 @@ public class Main {
                     if (isPiloot.equalsIgnoreCase("ja")) {
                         personeelslid = new Piloot(naam, leeftijd, adres);
                     } else {
-                        personeelslid = new Personeelslid(naam, leeftijd, adres);
+                        personeelslid =new Personeelslid(naam, leeftijd, adres);
                     }
 
                     System.out.print("Kies een vluchtcode om het personeelslid toe te voegen: ");
@@ -63,7 +63,7 @@ public class Main {
                     }
                     break;
                 }
-                case 3: {
+                case 3:{
                     System.out.print("Naam passagier: ");
                     String naam = scanner.nextLine();
                     System.out.print("Leeftijd: ");
@@ -85,18 +85,10 @@ public class Main {
                             System.out.println("Passagier toegevoegd aan de vlucht.");
 
                             // Flightcheck toevoegen
-                            Piloot piloot = null;
-                            for (Personeelslid personeelOpDeVlucht : vlucht.personeel) {
-                                if (personeelOpDeVlucht instanceof Piloot) {
-                                    piloot = (Piloot) personeelOpDeVlucht;
-                                    break;
-                                }
-                            }
-
-                            if (piloot != null && piloot.flightCheck(vlucht)) {
-                                System.out.println("Flightcheck oke! Alles is in orde, de vlucht kan opstijgen.");
+                            if (!vlucht.personeel.isEmpty() && !vlucht.passagiers.isEmpty()) {
+                                System.out.println("Flightcheck in orde!");
                             } else {
-                                System.out.println("Flightcheck niet oke. De vlucht kan niet opstijgen.");
+                                System.out.println("Flightcheck niet in orde.");
                             }
                         } else {
                             System.out.println("Vlucht niet gevonden.");
@@ -119,8 +111,6 @@ public class Main {
                 }
                 break;
             }
-
-
                 case 5: {
                     luchthaven.exporteerAlleVluchtInfo();
                     break;
@@ -128,14 +118,7 @@ public class Main {
                 case 6: {
                     System.out.println("Programma is gestopt.");
                     for (Vlucht vlucht : luchthaven.vluchten) {
-                        Piloot piloot = null;
-                        for (Personeelslid personeelOpDeVlucht : vlucht.personeel) {
-                            if (personeelOpDeVlucht instanceof Piloot) {
-                                piloot = (Piloot) personeelOpDeVlucht;
-                                break;
-                            }
-                        }
-                        if (piloot != null && piloot.flightCheck(vlucht)) {
+                        if (vlucht.isErEenPiloot()&& !vlucht.passagiers.isEmpty()) {
                             System.out.println("Vlucht " + vlucht.getVluchtCode() + " is klaar om te vertrekken.");
                         } else {
                             System.out.println("Vlucht " + vlucht.getVluchtCode() + " is niet klaar om te vertrekken.");
